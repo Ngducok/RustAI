@@ -4,7 +4,7 @@ A Rust-native AI training engine. It builds a training step as a typed graph, di
 optimises it, plans its memory once, and then runs it repeatedly out of preallocated buffers on
 the CPU or the GPU. Reinforcement learning (PPO) is built on the same pipeline.
 
-> **A student learning project**, not a production framework. It was built to understand how a deep-learning framework works inside (autodiff, graph compilation, memory planning, GPU kernels, PPO), and every claim below is backed by a test or a reproducible measurement. Tiếng Việt: [README.md](README.md).
+> **A student learning project**, not a production framework. It was built to understand how a deep-learning framework works inside (autodiff, graph compilation, memory planning, GPU kernels, PPO), and every claim below is backed by a test or a reproducible measurement. Tiếng Việt: [README.md](README.vi.md).
 
 ![Verification, stage by stage](docs/images/stages.png)
 
