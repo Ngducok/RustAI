@@ -1,0 +1,8 @@
+[package]
+name = "rt-autograd"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+
+[dependencies]
+rt-tensor.workspace = true

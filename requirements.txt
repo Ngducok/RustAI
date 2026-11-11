@@ -1,0 +1,7 @@
+# Needed only for the Python tooling: fixtures, comparisons with PyTorch, charts, the Python extension tests.
+# The Rust library itself has no Python dependency.
+numpy>=1.26
+torch>=2.2
+safetensors>=0.4
+matplotlib>=3.8
+pillow>=10

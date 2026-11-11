@@ -1,0 +1,62 @@
+== autodiff on loss = mean(relu(x*w + b)^2)
+  %0  = Input(x)() : [4, 2]
+  %1  = Input(w)() : [2, 3]
+  %2  = Input(b)() : [3]
+  %3  = MatMul(%0, %1) : [4, 3]   forward
+  %4  = Add(%3, %2) : [4, 3]   forward
+  %5  = Relu(%4) : [4, 3]   forward
+  %6  = Mul(%5, %5) : [4, 3]   forward
+  %7  = SumAll(%6) : []   forward
+  %8  = Scale(0.0833)(%7) : []   forward
+  %9  = Full(1.0)() : []   backward
+  %10 = Scale(0.0833)(%9) : []   backward
+  %11 = BroadcastTo(%10) : [4, 3]   backward
+  %12 = Mul(%11, %5) : [4, 3]   backward
+  %13 = Mul(%11, %5) : [4, 3]   backward
+  %14 = Add(%12, %13) : [4, 3]   backward
+  %15 = ReluGrad(%4, %14) : [4, 3]   backward
+  %16 = SumToShape(%15) : [3]   backward
+  %17 = MatMulNT(%15, %1) : [4, 2]   backward
+  %18 = MatMulTN(%0, %15) : [2, 3]   backward
+
+loss = 0.370208
+  parameter   autodiff   finite difference
+  w[0]    0.554167    0.554165
+  w[1]    0.033333    0.033334
+  w[2]    0.116667    0.116667
+  w[3]    0.425000    0.424999
+  w[4]    0.350000    0.350000
+  w[5]   -0.150000   -0.150000
+  b[0]    0.375000    0.375000
+  b[1]    0.283333    0.283334
+  b[2]    0.183333    0.183333
+largest difference: 1.43e-6
+
+== memory planning (float32 elements, 4 bytes each)
+                                  nodes   bufs   own MiB  plan MiB  peak MiB  saving
+  demo network, training step        22      8      0.53      0.51      0.39    1.0x
+  deep network, training step        58     20      2.48      2.02      1.19    1.2x
+  deep network, inference            28      2      1.01      0.25      0.25    4.0x
+
+== optimisation passes on the demo training step
+  autodiff output           30 nodes
+  broadcast folding         30 nodes
+  common subexpressions     30 nodes
+  Linear fusion             25 nodes
+  ReLU-gradient fusion      23 nodes
+  dead code                 22 nodes
+  ops before: {"Add": 3, "CrossEntropy": 1, "CrossEntropyGrad": 1, "Full(1.0)": 1, "MatMul": 3, "MatMulNT": 3, "MatMulTN": 3, "Relu": 2, "ReluGrad": 2, "SumToShape": 3}
+  ops after:  {"CrossEntropy": 1, "CrossEntropyGrad": 1, "Full(1.0)": 1, "Linear": 1, "Linear+ReLU": 2, "MatMulNTMasked": 2, "MatMulTN": 3, "SumToShape": 3}
+
+== autodiff against finite differences, one row per parameter tensor
+  tensor   autodiff   finite difference   relative error
+  w0      0.059277          0.059366           1.5e-3
+  b0      0.067073          0.067234           2.4e-3
+  w1      0.094724          0.094593           1.4e-3
+  b1      0.091098          0.091255           1.7e-3
+  w2      0.078285          0.078201           1.1e-3
+  b2      0.069546          0.069439           1.5e-3
+
+== GPU: 14 kernel launches per step, recorded once into one compute pass: {"matmul": 8, "reduce": 3, "rows": 2, "unary": 1}
+
+wrote target/inspect.json

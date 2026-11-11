@@ -1,0 +1,70 @@
+name: ci
+
+on:
+  push:
+  pull_request:
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  rust:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          components: rustfmt, clippy
+      - uses: Swatinem/rust-cache@v2
+      - name: Format
+        run: cargo fmt --all -- --check
+      - name: Lints
+        run: cargo clippy --workspace --exclude rt-python --all-targets -- -D warnings
+      - name: Tests
+        run: cargo test --workspace --exclude rt-python
+      - name: Learning tests (release)
+        run: cargo test --release --workspace --exclude rt-python -- --ignored
+
+  python:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: Swatinem/rust-cache@v2
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Dependencies
+        run: |
+          pip install numpy safetensors
+          pip install torch --index-url https://download.pytorch.org/whl/cpu
+      - name: Build the extension
+        run: python tools/build_python.py
+      - name: Python tests
+        run: PYTHONPATH=python python -m unittest discover -s python/tests -v
+      - name: Interoperability tests
+        run: cargo test -p rt-parity --test checkpoint
+
+  reproduce:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: Swatinem/rust-cache@v2
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Dependencies
+        run: |
+          pip install numpy safetensors matplotlib pillow
+          pip install torch --index-url https://download.pytorch.org/whl/cpu
+      - name: Tests, demo against PyTorch, benchmarks
+        run: python tools/reproduce.py --quick
+      - uses: actions/upload-artifact@v4
+        with:
+          name: reproduced
+          path: target/reproduced

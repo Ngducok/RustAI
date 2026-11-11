@@ -1,0 +1,17 @@
+[package]
+name = "rt-parity"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+publish = false
+
+[dependencies]
+rt-tensor.workspace = true
+rt-autograd.workspace = true
+rt-optim.workspace = true
+rt-nn = { path = "../../crates/nn" }
+rt-ir.workspace = true
+rt-runtime.workspace = true
+rt-rl.workspace = true
+rt-checkpoint.workspace = true
+serde_json = "1"

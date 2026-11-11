@@ -1,0 +1,30 @@
+[package]
+name = "rustai"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "A Rust-native AI training engine: tensors, autodiff, a compiling IR runtime, and reinforcement learning."
+
+[dependencies]
+rt-tensor.workspace = true
+rt-autograd.workspace = true
+rt-ir.workspace = true
+rt-compiler.workspace = true
+rt-memory.workspace = true
+rt-runtime.workspace = true
+rt-nn.workspace = true
+rt-optim.workspace = true
+rt-rl.workspace = true
+rt-checkpoint.workspace = true
+rt-gpu = { workspace = true, optional = true }
+
+[features]
+# GPU training through wgpu (Vulkan, Direct3D 12 or Metal).
+gpu = ["dep:rt-gpu"]
+
+[[example]]
+name = "gpu_training"
+required-features = ["gpu"]
+
+[dev-dependencies]
+serde_json = "1"

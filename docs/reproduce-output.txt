@@ -1,0 +1,33 @@
+
+== environment
+   PASS  rustc 1.99.1 (58cf8f9c3 2026-10-13); cargo 1.99.1 (5f94df478 2026-08-27); python 3.10.1, torch 2.6.0+cu124  (2s)
+
+== Rust tests (cargo test)
+   PASS  181 passed, 0 failed  (89s)
+
+== Python extension: build, import, tests against PyTorch and safetensors
+   PASS  7 tests  (30s)
+
+== explain: autodiff check, memory plan and GPU schedule of a real training step
+   PASS  autodiff vs finite differences: worst 2.4e-03 (MLP), 1.4e-06 (worked example)  (78s)
+
+== demo: train in Rust and PyTorch from identical weights and data
+      ok   final loss below 1e-3 in both
+      ok   loss curves within 5e-3 relative
+      ok   step-0 gradients within 1e-4 of PyTorch's
+      ok   decision regions agree on 98% of cells
+      ok   Rust test accuracy at least 95%
+   PASS  loss 5.2e-05 vs 5.2e-05, step-0 gradient diff 6.8e-06, step 419 us vs PyTorch 1935 us (4.6x)  (49s)
+
+== benchmarks: Rust against PyTorch (matmul, training step, GPU, PPO)
+   PASS  train step tiny 29.6x, medium 3.4x faster than PyTorch eager; 1-thread 512^3 matmul at 94% of PyTorch; PPO 9.8x env steps/s  (125s)
+
+== summary
+   PASS  environment: rustc 1.99.1 (58cf8f9c3 2026-10-13); cargo 1.99.1 (5f94df478 2026-08-27); python 3.10.1, torch 2.6.0+cu124
+   PASS  Rust tests (cargo test): 181 passed, 0 failed
+   PASS  Python extension: build, import, tests against PyTorch and safetensors: 7 tests
+   PASS  explain: autodiff check, memory plan and GPU schedule of a real training step: autodiff vs finite differences: worst 2.4e-03 (MLP), 1.4e-06 (worked example)
+   PASS  demo: train in Rust and PyTorch from identical weights and data: loss 5.2e-05 vs 5.2e-05, step-0 gradient diff 6.8e-06, step 419 us vs PyTorch 1935 us (4.6x)
+   PASS  benchmarks: Rust against PyTorch (matmul, training step, GPU, PPO): train step tiny 29.6x, medium 3.4x faster than PyTorch eager; 1-thread 512^3 matmul at 94% of PyTorch; PPO 9.8x env steps/s
+
+ALL STEPS PASSED; figures and data are in target/reproduced

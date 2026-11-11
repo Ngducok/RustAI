@@ -1,0 +1,18 @@
+[package]
+name = "rt-bench"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+publish = false
+default-run = "rt-bench"
+
+[dependencies]
+rt-tensor.workspace = true
+rayon = "1.10"
+rt-autograd.workspace = true
+rt-optim.workspace = true
+rt-runtime.workspace = true
+rt-rl.workspace = true
+rt-gpu.workspace = true
+rt-ir.workspace = true
+rt-nn = { path = "../crates/nn" }

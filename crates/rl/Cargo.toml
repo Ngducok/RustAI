@@ -1,0 +1,16 @@
+[package]
+name = "rt-rl"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+
+[dependencies]
+rt-tensor.workspace = true
+rt-ir.workspace = true
+rt-runtime.workspace = true
+rt-nn.workspace = true
+rt-optim.workspace = true
+rayon = "1.10"
+
+[dev-dependencies]
+rt-autograd.workspace = true

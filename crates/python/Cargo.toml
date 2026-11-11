@@ -1,0 +1,16 @@
+[package]
+name = "rt-python"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "Python bindings for rustai (build with tools/build_python.py)."
+
+[lib]
+name = "rustai_py"
+crate-type = ["cdylib"]
+test = false
+doctest = false
+
+[dependencies]
+rustai.workspace = true
+pyo3 = { version = "0.22", features = ["extension-module"] }

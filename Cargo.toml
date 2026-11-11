@@ -1,0 +1,43 @@
+[workspace]
+resolver = "2"
+members = [
+    "crates/tensor",
+    "crates/autograd",
+    "crates/optim",
+    "crates/nn",
+    "crates/ir",
+    "crates/compiler",
+    "crates/memory",
+    "crates/runtime",
+    "crates/rl",
+    "crates/checkpoint",
+    "crates/gpu",
+    "crates/rustai",
+    "crates/python",
+    "tests/parity",
+    "benchmarks",
+]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2021"
+license = "MIT"
+
+[workspace.dependencies]
+rt-tensor = { path = "crates/tensor" }
+rt-autograd = { path = "crates/autograd" }
+rt-optim = { path = "crates/optim" }
+rt-ir = { path = "crates/ir" }
+rt-compiler = { path = "crates/compiler" }
+rt-memory = { path = "crates/memory" }
+rt-runtime = { path = "crates/runtime" }
+rt-nn = { path = "crates/nn" }
+rt-rl = { path = "crates/rl" }
+rt-checkpoint = { path = "crates/checkpoint" }
+rt-gpu = { path = "crates/gpu" }
+rustai = { path = "crates/rustai" }
+
+[profile.release]
+opt-level = 3
+lto = "thin"
+codegen-units = 1

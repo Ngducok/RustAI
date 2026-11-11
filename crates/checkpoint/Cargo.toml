@@ -1,0 +1,9 @@
+﻿[package]
+name = "rt-checkpoint"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+
+[dependencies]
+rt-tensor.workspace = true
+serde_json = "1"

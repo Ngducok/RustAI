@@ -1,0 +1,16 @@
+[package]
+name = "rt-nn"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+
+[dependencies]
+rt-tensor.workspace = true
+rt-autograd.workspace = true
+rt-ir.workspace = true
+rt-runtime.workspace = true
+
+[dev-dependencies]
+rt-optim.workspace = true
+rt-compiler.workspace = true
+rayon = "1.10"

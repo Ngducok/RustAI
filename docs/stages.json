@@ -1,0 +1,205 @@
+[
+ {
+  "stage": "Hygiene",
+  "checks": [
+   {
+    "label": "rustfmt",
+    "passed": 1,
+    "failed": 0,
+    "skipped": false,
+    "seconds": 0.6287224292755127,
+    "note": ""
+   },
+   {
+    "label": "clippy",
+    "passed": 1,
+    "failed": 0,
+    "skipped": false,
+    "seconds": 8.458546876907349,
+    "note": "no warnings"
+   }
+  ]
+ },
+ {
+  "stage": "1  Tensor (CPU)",
+  "checks": [
+   {
+    "label": "unit and kernel tests",
+    "passed": 43,
+    "failed": 0,
+    "skipped": false,
+    "seconds": 1.2543416023254395,
+    "note": ""
+   }
+  ]
+ },
+ {
+  "stage": "2  Autograd and training",
+  "checks": [
+   {
+    "label": "autograd, optim, nn",
+    "passed": 33,
+    "failed": 0,
+    "skipped": false,
+    "seconds": 0.7252802848815918,
+    "note": ""
+   },
+   {
+    "label": "PyTorch parity",
+    "passed": 3,
+    "failed": 0,
+    "skipped": false,
+    "seconds": 0.1414797306060791,
+    "note": ""
+   }
+  ]
+ },
+ {
+  "stage": "3  IR and runtime",
+  "checks": [
+   {
+    "label": "ir, compiler, memory, runtime",
+    "passed": 51,
+    "failed": 0,
+    "skipped": false,
+    "seconds": 0.4890129566192627,
+    "note": ""
+   },
+   {
+    "label": "IR parity with PyTorch",
+    "passed": 3,
+    "failed": 0,
+    "skipped": false,
+    "seconds": 0.1962747573852539,
+    "note": ""
+   }
+  ]
+ },
+ {
+  "stage": "4  GPU backend",
+  "checks": [
+   {
+    "label": "gpu",
+    "passed": 14,
+    "failed": 0,
+    "skipped": false,
+    "seconds": 1.1456892490386963,
+    "note": "NVIDIA GeForce RTX 4050 Laptop GPU (Vulkan)"
+   },
+   {
+    "label": "example: gpu_training",
+    "passed": 1,
+    "failed": 0,
+    "skipped": false,
+    "seconds": 38.03612518310547,
+    "note": ""
+   }
+  ]
+ },
+ {
+  "stage": "5  Reinforcement learning",
+  "checks": [
+   {
+    "label": "rl",
+    "passed": 17,
+    "failed": 0,
+    "skipped": false,
+    "seconds": 28.168843507766724,
+    "note": ""
+   },
+   {
+    "label": "RL parity",
+    "passed": 3,
+    "failed": 0,
+    "skipped": false,
+    "seconds": 0.13714289665222168,
+    "note": ""
+   },
+   {
+    "label": "PPO solves CartPole (release)",
+    "passed": 2,
+    "failed": 0,
+    "skipped": false,
+    "seconds": 4.837101936340332,
+    "note": ""
+   }
+  ]
+ },
+ {
+  "stage": "6  Library packaging",
+  "checks": [
+   {
+    "label": "checkpoint",
+    "passed": 5,
+    "failed": 0,
+    "skipped": false,
+    "seconds": 0.18251776695251465,
+    "note": ""
+   },
+   {
+    "label": "facade and doctests",
+    "passed": 7,
+    "failed": 0,
+    "skipped": false,
+    "seconds": 0.5934622287750244,
+    "note": ""
+   },
+   {
+    "label": "safetensors interop",
+    "passed": 2,
+    "failed": 0,
+    "skipped": false,
+    "seconds": 0.5624065399169922,
+    "note": ""
+   },
+   {
+    "label": "example: xor",
+    "passed": 1,
+    "failed": 0,
+    "skipped": false,
+    "seconds": 2.2460110187530518,
+    "note": ""
+   },
+   {
+    "label": "example: checkpoint_resume",
+    "passed": 1,
+    "failed": 0,
+    "skipped": false,
+    "seconds": 1.853546142578125,
+    "note": ""
+   },
+   {
+    "label": "example: inspect",
+    "passed": 1,
+    "failed": 0,
+    "skipped": false,
+    "seconds": 0.428333044052124,
+    "note": ""
+   },
+   {
+    "label": "example: demo",
+    "passed": 1,
+    "failed": 0,
+    "skipped": false,
+    "seconds": 1.167402982711792,
+    "note": ""
+   },
+   {
+    "label": "build Python module",
+    "passed": 1,
+    "failed": 0,
+    "skipped": false,
+    "seconds": 11.564034700393677,
+    "note": ""
+   },
+   {
+    "label": "Python tests",
+    "passed": 7,
+    "failed": 0,
+    "skipped": false,
+    "seconds": 6.5447998046875,
+    "note": ""
+   }
+  ]
+ }
+]
